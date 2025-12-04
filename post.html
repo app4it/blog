@@ -23,21 +23,19 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="Read this post on the App4it Blog - Real Events. Real People. Real Stories." />
     <meta name="keywords" content="App4it blog, events, community" />
-    <link rel="canonical" href="https://blog.app4it.de/post.html" />
-    
+
     <!-- Open Graph Tags -->
     <meta property="og:title" content="App4it Blog Post" />
     <meta property="og:description" content="Read this post on the App4it Blog" />
-    <meta property="og:image" content="https://app4it.de/assets/icons/app_icon_light.png" />
-    <meta property="og:url" content="https://blog.app4it.de/post.html" />
+    <meta property="og:image" content="assets/icons/app_icon_light.png" />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="App4it Blog" />
-    
+
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="App4it Blog Post" />
     <meta name="twitter:description" content="Read this post on the App4it Blog" />
-    <meta name="twitter:image" content="https://app4it.de/assets/icons/app_icon_light.png" />
+    <meta name="twitter:image" content="assets/icons/app_icon_light.png" />
     
     <title>Blog Post - App4it Blog</title>
     <!-- Favicons -->
@@ -76,6 +74,28 @@
       }
       gtag("js", new Date());
       gtag("config", "G-SJTXC37LXF");
+    </script>
+    <script>
+      // Dynamically set canonical and Open Graph URLs
+      document.addEventListener('DOMContentLoaded', () => {
+        // Create and set canonical link
+        let canonicalLink = document.querySelector('link[rel="canonical"]');
+        if (!canonicalLink) {
+          canonicalLink = document.createElement('link');
+          canonicalLink.rel = 'canonical';
+          document.head.appendChild(canonicalLink);
+        }
+        canonicalLink.href = window.location.href.split('?')[0]; // Remove query params for canonical
+
+        // Create and set Open Graph URL meta tag
+        let ogUrlMeta = document.querySelector('meta[property="og:url"]');
+        if (!ogUrlMeta) {
+          ogUrlMeta = document.createElement('meta');
+          ogUrlMeta.property = 'og:url';
+          document.head.appendChild(ogUrlMeta);
+        }
+        ogUrlMeta.content = window.location.href;
+      });
     </script>
   </head>
   <body>

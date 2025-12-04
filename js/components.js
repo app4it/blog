@@ -1,12 +1,28 @@
 // Reusable component templates
 
 function createNavbar(activePage = '') {
-    // Determine base path based on current location
-    const isOnBlogDomain = window.location.hostname === 'blog.app4it.de';
-    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const homePath = isOnBlogDomain ? 'https://app4it.de/index.html' : (isLocalhost ? 'http://localhost:8081/index.html' : 'https://app4it.de/index.html');
-    const aboutPath = isOnBlogDomain ? 'https://app4it.de/about-us.html' : (isLocalhost ? 'http://localhost:8081/about-us.html' : 'https://app4it.de/about-us.html');
-    const blogPath = isOnBlogDomain ? 'index.html' : 'index.html';
+    // Determine base path dynamically based on current location
+    const currentHostname = window.location.hostname;
+    const currentProtocol = window.location.protocol;
+    const currentPort = window.location.port;
+
+    // Determine the main site URL
+    let mainSiteUrl;
+    if (currentHostname === 'localhost' || currentHostname === '127.0.0.1') {
+        // Local development - assume main site is on same server
+        mainSiteUrl = `${currentProtocol}//${currentHostname}${currentPort ? ':' + currentPort : ''}`;
+    } else if (currentHostname === 'blog.app4it.de') {
+        // Production blog subdomain
+        mainSiteUrl = 'https://app4it.de';
+    } else {
+        // Fallback for other environments
+        mainSiteUrl = `${currentProtocol}//${currentHostname}${currentPort ? ':' + currentPort : ''}`;
+    }
+
+    const homePath = `${mainSiteUrl}/index.html`;
+    const aboutPath = `${mainSiteUrl}/about-us.html`;
+    // Blog path is always relative since we're on the blog
+    const blogPath = 'index.html';
     
     return `
     <div class="nav-container" role="navigation" aria-label="Primary">
