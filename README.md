@@ -70,3 +70,4 @@ Your post content here...
 - All posts should be in the `posts` folder
 - The `posts.json` file must list all post filenames
 
+ 
