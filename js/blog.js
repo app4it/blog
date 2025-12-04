@@ -78,9 +78,9 @@ async function loadBlogPosts() {
     postsContainer.innerHTML = '<div class="blog-loading"><i class="fas fa-spinner"></i><p>Loading posts...</p></div>';
 
     try {
-        // Use absolute paths for reliability
-        const postsJsonPath = '/blog/posts/posts.json';
-        const postsBasePath = '/blog/posts/';
+        // Use relative paths since blog is now served from root
+        const postsJsonPath = 'posts/posts.json';
+        const postsBasePath = 'posts/';
 
         console.log('Loading posts from:', postsJsonPath);
 
@@ -222,8 +222,8 @@ async function loadBlogPost(slug) {
     postContainer.innerHTML = '<div class="blog-loading"><i class="fas fa-spinner"></i><p>Loading post...</p></div>';
 
     try {
-        // Use absolute path to ensure it works from any page
-        const postPath = `/blog/posts/${slug}.md`;
+        // Use relative path since blog is now served from root
+        const postPath = `posts/${slug}.md`;
 
         console.log('Loading post:', slug, 'from:', postPath);
 
