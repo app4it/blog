@@ -2,7 +2,7 @@
 title: Why the Best Memories Happen When You Put Your Phone Down
 date: 2025-12-11
 author: App4it Team
-excerpt: The best memories don’t happen on your screen—they happen when you look up. When you put your phone down, you experience life with all your senses, connect more deeply with people around you, and stay open to the kind of spontaneous moments that become unforgettable. At App4it, we help you discover real-life experiences that spark those offline memories you’ll carry with you for years.
+excerpt: The best memories happen when you look up. When you put your phone away, you connect more deeply, feel more fully, and stay open to the spontaneous moments that become unforgettable.
 ---
 
 # Why the Best Memories Happen When You Put Your Phone Down
