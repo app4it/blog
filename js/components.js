@@ -1,45 +1,12 @@
 // Reusable component templates
 
-function createNavbar(activePage = '') {
-    // Determine base path dynamically based on current location
-    const currentHostname = window.location.hostname;
-    const currentProtocol = window.location.protocol;
-    const currentPort = window.location.port;
-
-    // Determine the main site URL
-    let mainSiteUrl;
-    if (currentHostname === 'localhost' || currentHostname === '127.0.0.1') {
-        // Local development - assume main site is on same server
-        mainSiteUrl = `${currentProtocol}//${currentHostname}${currentPort ? ':' + currentPort : ''}`;
-    } else if (currentHostname === 'blog.app4it.de') {
-        // Production blog subdomain
-        mainSiteUrl = 'https://app4it.de';
-    } else {
-        // Fallback for other environments
-        mainSiteUrl = `${currentProtocol}//${currentHostname}${currentPort ? ':' + currentPort : ''}`;
-    }
-
-    const homePath = `${mainSiteUrl}/index.html`;
-    const aboutPath = `${mainSiteUrl}/about-us.html`;
-    // Blog path is always relative since we're on the blog
-    const blogPath = 'index.html';
-    
-    return `
-    <div class="nav-container" role="navigation" aria-label="Primary">
-      <a href="${homePath}" class="nav-link${activePage === 'home' ? ' active' : ''}" data-i18n="home"${activePage === 'home' ? ' aria-current="page"' : ''}>Home</a>
-      <a href="${aboutPath}" class="nav-link${activePage === 'about' ? ' active' : ''}" data-i18n="aboutUs"${activePage === 'about' ? ' aria-current="page"' : ''}>About Us</a>
-      <a href="${blogPath}" class="nav-link${activePage === 'blog' ? ' active' : ''}" data-i18n="blog"${activePage === 'blog' ? ' aria-current="page"' : ''}>Blog</a>
-    </div>
-    `;
-}
-
 function createFooter() {
     return `
     <footer class="footer">
       <p>
         <span data-i18n="copyright">© 2025 App4it Project Team. All rights reserved.</span>
         <span class="footer-separator">|</span>
-        <a href="impressum.html" class="footer-link" data-i18n="impressum">Impressum</a>
+        <a href="https://app4it.de/impressum" class="footer-link" data-i18n="impressum">Impressum</a>
         <span class="footer-separator">|</span>
         <a href="https://x.com/AreYouApp4it" target="_blank" rel="noopener" class="footer-link" aria-label="Follow us on X">
           <i class="fab fa-x-twitter"></i>
@@ -141,13 +108,6 @@ function createSettingsContainer() {
 
 // Auto-inject components on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject navbar
-    const navPlaceholder = document.getElementById('nav-placeholder');
-    if (navPlaceholder) {
-        const activePage = navPlaceholder.getAttribute('data-active') || '';
-        navPlaceholder.outerHTML = createNavbar(activePage);
-    }
-    
     // Inject settings container
     const settingsPlaceholder = document.getElementById('settings-placeholder');
     if (settingsPlaceholder) {

@@ -27,7 +27,7 @@ On this blog, you'll find:
 
 We're just getting started, and we'd love for you to be part of this journey. Whether you're an event organizer, someone looking to meet new people, or just curious about what we're building, we're glad you're here.
 
-Stay tuned for more posts, and don't forget to [join our waitlist](https://app4it.de/early-access.html) if you haven't already!
+Stay tuned for more posts, and don't forget to [join our waitlist](https://app4it.de/early-access) if you haven't already!
 
 ---
 

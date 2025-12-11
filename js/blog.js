@@ -179,7 +179,7 @@ function renderBlogPosts(posts) {
     posts.forEach(post => {
         console.log('Rendering post:', post.title, post.slug);
         const postCard = document.createElement('a');
-        postCard.href = `post.html?slug=${post.slug}`;
+        postCard.href = `post?slug=${post.slug}`;
         postCard.className = 'blog-post-card';
         
         postCard.innerHTML = `
