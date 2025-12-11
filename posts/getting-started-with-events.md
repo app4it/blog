@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Events
-date: 2025-01-20
+date: 2025-12-04
 author: App4it Team
 excerpt: Learn how to discover and create amazing events in your area. A beginner's guide to making real connections.
 tags: guide, events, getting-started
