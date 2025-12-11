@@ -1,6 +1,6 @@
 ---
 title: Welcome to App4it
-date: 2025-01-15
+date: 2025-12-04
 author: App4it Team
 excerpt: We're excited to launch our blog and share our journey of building authentic connections through real events.
 tags: announcement, welcome, community
