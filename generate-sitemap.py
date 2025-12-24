@@ -17,9 +17,19 @@ def parse_frontmatter(content):
     if match:
         frontmatter = {}
         for line in match.group(1).split('\n'):
+            # Skip empty lines
+            if not line.strip():
+                continue
+            # Look for key: value pattern
             if ':' in line:
                 key, value = line.split(':', 1)
-                frontmatter[key.strip()] = value.strip().strip('"').strip("'")
+                key = key.strip()
+                value = value.strip()
+                # Remove quotes (single or double) from the beginning and end
+                if value and ((value.startswith('"') and value.endswith('"')) or 
+                             (value.startswith("'") and value.endswith("'"))):
+                    value = value[1:-1]
+                frontmatter[key] = value
         return frontmatter
     return {}
 

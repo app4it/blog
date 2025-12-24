@@ -1,5 +1,8 @@
 // blog.js - Blog functionality for markdown parsing and post listing
 
+// Configuration constants
+const DEFAULT_KEYWORDS = 'App4it blog, events, community';
+
 // Initialize markdown parser
 function initMarkdownParser() {
     if (typeof marked !== 'undefined' && marked) {
@@ -69,7 +72,7 @@ function updateMetaTags(frontMatter, slug) {
     const postUrl = `${baseUrl}/post?slug=${slug}`;
     const title = frontMatter.title || 'Untitled';
     const description = frontMatter.excerpt || 'Read this post on the App4it Blog';
-    const keywords = frontMatter.tags || 'App4it blog, events, community';
+    const keywords = frontMatter.tags || DEFAULT_KEYWORDS;
     
     // Update or create meta tags
     const metaTags = [
@@ -152,7 +155,7 @@ function addStructuredData(frontMatter, slug, content) {
     };
     
     if (frontMatter.tags) {
-        structuredData.keywords = frontMatter.tags;
+        structuredData.keywords = frontMatter.tags.split(',').map(tag => tag.trim());
     }
     
     const script = document.createElement('script');
