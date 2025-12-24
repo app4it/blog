@@ -63,6 +63,22 @@ Your post content here...
 
 4. Commit and push to your repository
 
+**Note:** The sitemap (`sitemap.xml`) is automatically generated via GitHub Actions whenever posts are added or modified. You don't need to manually update the sitemap.
+
+## SEO and Indexing
+
+The blog is configured for optimal Google indexing:
+
+- **Automatic Sitemap Generation**: The `sitemap.xml` file is automatically updated via GitHub Actions whenever posts are added or modified
+- **Robots.txt**: Tells search engines where to find the sitemap
+- **JSON-LD Structured Data**: Each post includes structured data to help search engines understand the content
+- **Dynamic Meta Tags**: SEO meta tags are dynamically updated for each post
+
+To manually regenerate the sitemap, run:
+```bash
+python3 generate-sitemap.py
+```
+
 ## Notes
 
 - Posts are sorted by date (newest first)

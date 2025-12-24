@@ -63,6 +63,105 @@ function getExcerpt(content, maxLength = 150) {
     return text;
 }
 
+// Update meta tags for SEO
+function updateMetaTags(frontMatter, slug) {
+    const baseUrl = 'https://blog.app4it.de';
+    const postUrl = `${baseUrl}/post?slug=${slug}`;
+    const title = frontMatter.title || 'Untitled';
+    const description = frontMatter.excerpt || 'Read this post on the App4it Blog';
+    const keywords = frontMatter.tags || 'App4it blog, events, community';
+    
+    // Update or create meta tags
+    const metaTags = [
+        { name: 'description', content: description },
+        { name: 'keywords', content: keywords },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:url', content: postUrl },
+        { property: 'og:type', content: 'article' },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: description },
+    ];
+    
+    metaTags.forEach(tag => {
+        let element;
+        if (tag.property) {
+            element = document.querySelector(`meta[property="${tag.property}"]`);
+        } else {
+            element = document.querySelector(`meta[name="${tag.name}"]`);
+        }
+        
+        if (element) {
+            element.setAttribute('content', tag.content);
+        } else {
+            element = document.createElement('meta');
+            if (tag.property) {
+                element.setAttribute('property', tag.property);
+            } else {
+                element.setAttribute('name', tag.name);
+            }
+            element.setAttribute('content', tag.content);
+            document.head.appendChild(element);
+        }
+    });
+    
+    // Update canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+        canonical.href = postUrl;
+    }
+}
+
+// Add JSON-LD structured data for better SEO
+function addStructuredData(frontMatter, slug, content) {
+    const baseUrl = 'https://blog.app4it.de';
+    const postUrl = `${baseUrl}/post?slug=${slug}`;
+    
+    // Remove any existing structured data
+    const existingScript = document.getElementById('blog-structured-data');
+    if (existingScript) {
+        existingScript.remove();
+    }
+    
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": frontMatter.title || 'Untitled',
+        "description": frontMatter.excerpt || getExcerpt(content),
+        "author": {
+            "@type": "Organization",
+            "name": frontMatter.author || 'App4it Team',
+            "url": "https://app4it.de"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "App4it",
+            "url": "https://app4it.de",
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${baseUrl}/assets/icons/app_icon_light.png`
+            }
+        },
+        "datePublished": frontMatter.date || new Date().toISOString().split('T')[0],
+        "dateModified": frontMatter.date || new Date().toISOString().split('T')[0],
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": postUrl
+        },
+        "url": postUrl
+    };
+    
+    if (frontMatter.tags) {
+        structuredData.keywords = frontMatter.tags;
+    }
+    
+    const script = document.createElement('script');
+    script.id = 'blog-structured-data';
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData, null, 2);
+    document.head.appendChild(script);
+}
+
 // Format date
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -241,6 +340,12 @@ async function loadBlogPost(slug) {
         if (frontMatter.title) {
             document.title = `${frontMatter.title} - App4it Blog`;
         }
+
+        // Update SEO meta tags
+        updateMetaTags(frontMatter, slug);
+        
+        // Add JSON-LD structured data
+        addStructuredData(frontMatter, slug, markdownContent);
 
         // Update header if it exists
         if (postHeader) {
